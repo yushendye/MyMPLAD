@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="7dp"
     tools:context=".UserPortal">
 
     <androidx.appcompat.widget.Toolbar
@@ -89,7 +90,7 @@
         android:layout_marginTop="7dp"
         android:textSize="15dp"
         android:layout_below="@id/til_desc"
-        android:text="@string/problem"
+        android:text="@string/select_mp"
         android:textColor="@color/col_txt_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
