@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:background="@drawable/decent_back"
+    tools:context=".LoginActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="30dp"
+        android:id="@+id/til_username"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/edt_login_username"
+            android:layout_height="match_parent"
+            android:hint="@string/username"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@+id/til_username"
+        android:id="@+id/til_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/edt_login_password"
+            android:layout_height="match_parent"
+            android:hint="@string/password"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/btn_login"
+        android:background="@drawable/btn_login_back"
+        android:textColor="@color/col_btn_white"
+        android:textSize="18dp"
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/til_pwd"
+        android:layout_width="match_parent"
+        android:text="@string/login"
+        android:textAllCaps="false"
+        android:onClick="login"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginTop="7dp"
+        android:id="@+id/txt_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:onClick="register"
+        android:text="@string/register"
+        android:textColor="@color/col_txt_black"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"/>
+</RelativeLayout>
