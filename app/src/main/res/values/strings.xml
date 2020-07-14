@@ -26,5 +26,6 @@
     <string name="problem_desc">Describe your problem in detail</string>
     <string name="submit_complaint">Submit Complaint</string>
     <string name="select_mp">Select MP from the list to whom you want to complain the report to</string>
+    <string name="save_changes">Save Changes</string>
 
 </resources>
