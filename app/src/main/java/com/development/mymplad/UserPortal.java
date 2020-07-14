@@ -12,6 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,13 +35,14 @@ public class UserPortal extends AppCompatActivity {
     List<String> states;
     List<String> districts;
     List<String> problem_list;
+    List<String> mp_list;
 
 
-    String state_district_json;
+    String state_district_json, mps_data_json;
+    Spinner spn_state, spn_dis, spn_problem, spn_mp;
 
-    Spinner spn_state, spn_dis, spn_problem;
-
-    ArrayAdapter<String> state_adapter, district_adapter, problem_adapter;
+    private static final String URL = "https://mymplad.000webhostapp.com/mps.json";
+    ArrayAdapter<String> state_adapter, district_adapter, problem_adapter, mp_adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,21 +51,27 @@ public class UserPortal extends AppCompatActivity {
         spn_state = findViewById(R.id.spn_state);
         spn_dis = findViewById(R.id.spn_city);
         spn_problem = findViewById(R.id.spn_problem);
-
+        spn_mp = findViewById(R.id.spn_mp);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         load_state_district_json();
         load_states();
-
         init_state_spinner();
+        load_problem_list();
+        init_problem_list();
+
         spn_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String state_selected = states.get(position);
+
                 load_districts(state_selected);
                 init_district_spinner();
+
+                load_mps_data(state_selected);
+                init_mp_spinner();
             }
 
             @Override
@@ -65,15 +79,27 @@ public class UserPortal extends AppCompatActivity {
 
             }
         });
-
-        load_problem_list();
-        init_problem_list();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.user_menu, menu);
         return true;
+    }
+
+    public void init_state_spinner(){
+        state_adapter = new ArrayAdapter<>(UserPortal.this, android.R.layout.simple_expandable_list_item_1, states);
+        spn_state.setAdapter(state_adapter);
+    }
+
+    public void init_district_spinner(){
+        district_adapter = new ArrayAdapter<>(UserPortal.this, android.R.layout.simple_expandable_list_item_1, districts);
+        spn_dis.setAdapter(district_adapter);
+    }
+
+    public void init_mp_spinner(){
+        mp_adapter = new ArrayAdapter<>(UserPortal.this, android.R.layout.simple_expandable_list_item_1, mp_list);
+        spn_mp.setAdapter(mp_adapter);
     }
 
     public void  load_state_district_json(){
@@ -90,6 +116,27 @@ public class UserPortal extends AppCompatActivity {
             }
         }catch (Exception e){
             toast(e.getMessage());
+        }
+    }
+
+    public void load_mps_data(final String state){
+        mp_list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.mps)));
+        try {
+            mps_data_json = reader.readLine();
+        }catch (Exception e){}
+
+        try {
+            JSONObject object = new JSONObject(mps_data_json);
+            JSONArray data = object.getJSONArray("data");
+
+            for(int i = 0; i < data.length(); i++){
+                JSONArray array = data.getJSONArray(i);
+                if(array.getString(8).equals(state))
+                    mp_list.add(array.getString(0));
+            }
+        }catch (JSONException ex){
+            toast(ex.getMessage());
         }
     }
 
@@ -125,15 +172,7 @@ public class UserPortal extends AppCompatActivity {
         }
     }
 
-    public void init_state_spinner(){
-        state_adapter = new ArrayAdapter<>(UserPortal.this, android.R.layout.simple_expandable_list_item_1, states);
-        spn_state.setAdapter(state_adapter);
-    }
 
-    public void init_district_spinner(){
-        district_adapter = new ArrayAdapter<>(UserPortal.this, android.R.layout.simple_expandable_list_item_1, districts);
-        spn_dis.setAdapter(district_adapter);
-    }
 
 
     public void toast(String msg){
