@@ -44,4 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent register_intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(register_intent);
     }
+
+    public void mp_login(View view){
+        Intent mp_intent = new Intent(LoginActivity.this, MPLogin.class);
+        startActivity(mp_intent);
+    }
 }

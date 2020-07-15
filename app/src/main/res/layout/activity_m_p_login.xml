@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="@drawable/decent_back"
-    tools:context=".LoginActivity">
+    tools:context=".MPLogin">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="30dp"
@@ -29,8 +29,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:id="@+id/edt_login_password"
-            android:inputType="textPassword"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
             android:hint="@string/password"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:text="@string/login"
         android:textAllCaps="false"
-        android:onClick="login"
+        android:onClick="mp_login"
         android:layout_height="wrap_content"/>
 
     <TextView
@@ -54,19 +54,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="128dp"
         android:gravity="center"
-        android:onClick="register"
-        android:text="@string/register"
-        android:textColor="@color/col_txt_black"
-        android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/txt_mp_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="mp_login"
-        android:layout_alignParentBottom="true"
-        android:text="@string/mp_login"
+        android:text="@string/sample_password"
         android:textColor="@color/col_txt_black"
         android:textSize="20dp" />
 </RelativeLayout>

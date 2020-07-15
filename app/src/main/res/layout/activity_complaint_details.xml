@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ComplaintDetails">
+
+    <ImageView
+        android:id="@+id/imv_det_complaint_logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/logo" />
+    <TextView
+        android:id="@+id/complaint_head"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/imv_det_complaint_logo"
+        android:textSize="18dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/col_txt_black"
+        android:text="@string/complaint_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/det_complain_desc"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/col_txt_black"
+        android:layout_below="@id/complaint_head"
+        android:text="@string/complaint_desc"/>
+    <TextView
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/det_complaint_loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/col_txt_black"
+        android:layout_below="@id/det_complain_desc"
+        android:text="@string/complain_loc"/>
+
+    <Button
+        android:layout_marginTop="45dp"
+        android:id="@+id/det_complaint_res"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/reg_btn_backround"
+        android:layout_below="@id/det_complaint_loc"
+        android:drawableLeft="@android:drawable/checkbox_on_background"
+        android:text="@string/complaint_res"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/det_complaint_wait"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/det_complaint_res"
+        android:background="@drawable/btn_wait"
+        android:drawableLeft="@android:drawable/presence_away"
+        android:text="@string/complaint_res"
+        android:textAllCaps="false" />
+</RelativeLayout>

@@ -27,5 +27,11 @@
     <string name="submit_complaint">Submit Complaint</string>
     <string name="select_mp">Select MP from the list to whom you want to complain the report to</string>
     <string name="save_changes">Save Changes</string>
-
+    <string name="mp_login">Login As Member of Parliament</string>
+    <string name="sample_password">Default MP Login\nusername : manmohan_singh,\nPassword: manmohan_singh123</string>
+    <string name="complaint_head">Complaint Title</string>
+    <string name="complaint_desc">Complaint Description</string>
+    <string name="complain_loc">Comlaint Location</string>
+    <string name="complaint_res">Complaint Resolved</string>
+    <string name="complaint_wait">Put on Waiting</string>
 </resources>
