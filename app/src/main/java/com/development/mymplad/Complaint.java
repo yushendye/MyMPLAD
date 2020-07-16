@@ -1,6 +1,7 @@
 package com.development.mymplad;
 
 public class Complaint {
+    int id;
     String url;
     String title;
     String description;
@@ -9,11 +10,20 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(String url, String title, String description, String location) {
+    public Complaint(int id, String url, String title, String description, String location) {
+        this.id = id;
         this.url = url;
         this.title = title;
         this.description = description;
         this.location = location;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUrl() {

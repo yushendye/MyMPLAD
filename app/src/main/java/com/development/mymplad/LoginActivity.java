@@ -6,11 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.VideoView;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
+
+    DbHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +23,9 @@ public class LoginActivity extends AppCompatActivity {
 
         username = findViewById(R.id.edt_login_username);
         password = findViewById(R.id.edt_login_password);
+
+        helper = new DbHelper(getApplicationContext());
+        //helper.user_register(1, "chinmay", "shendye", "Upendra", "chinmaester","Maharashtra", "Ratnagiri", "Nachane", "Male", "9975086979", "443434343", "123456");
     }
 
     public boolean validate(){
@@ -36,7 +44,12 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view){
         if(validate()){
             Intent login_intent = new Intent(LoginActivity.this, UserPortal.class);
-            startActivity(login_intent);
+            List<User> logged_in_details = helper.login(username.getText().toString(), password.getText().toString());
+
+            if(logged_in_details.size() > 0)
+                startActivity(login_intent);
+            else
+                Toast.makeText(this, "Invalid login details!!", Toast.LENGTH_SHORT).show();
         }
     }
 
