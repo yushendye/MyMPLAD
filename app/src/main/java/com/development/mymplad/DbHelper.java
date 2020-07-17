@@ -59,7 +59,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_LOGIN = "CREATE TABLE " + TBL_LOGIN_TABLE + "(" + COL_LOGIN_ID + " integer primary key, " + COL_FNAME + " string,"
+        String CREATE_LOGIN = "CREATE TABLE " + TBL_LOGIN_TABLE + "(" + COL_LOGIN_ID + " integer primary key autoincrement, " + COL_FNAME + " string,"
                 + COL_LNAME + " string, " + COL_MNAME + " string, " + COL_USERNAME + " string, " + COL_STATE + " string, " + COL_GEN + " string, " +
                 COL_DISTRIACT + " string, " + COL_ADDRESS + " string, " + COL_AADHAR + " string, " + COL_CONTACT + " string, " +
                 COL_PASSWORD + " string)";
@@ -76,11 +76,10 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_SUGGESTION);
     }
 
-    public void  user_register(int id, String fname, String lname, String mname, String username, String state, String district, String address, String gender, String contact, String aadhar, String password){
+    public void  user_register(String fname, String lname, String mname, String username, String state, String district, String address, String gender, String contact, String aadhar, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(COL_LOGIN_ID, id);
         values.put(COL_FNAME, fname);
         values.put(COL_LNAME, lname);
         values.put(COL_MNAME, mname);

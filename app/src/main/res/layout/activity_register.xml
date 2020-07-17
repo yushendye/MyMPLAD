@@ -192,6 +192,7 @@
                 android:text="@string/reg"
                 android:textColor="@color/col_btn_white"
                 android:textSize="18dp"
+                android:onClick="register"
                 android:textAllCaps="false"/>
         </RelativeLayout>
     </ScrollView>

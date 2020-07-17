@@ -46,8 +46,10 @@ public class LoginActivity extends AppCompatActivity {
             Intent login_intent = new Intent(LoginActivity.this, UserPortal.class);
             List<User> logged_in_details = helper.login(username.getText().toString(), password.getText().toString());
 
-            if(logged_in_details.size() > 0)
+            if(logged_in_details.size() > 0) {
+                login_intent.putExtra("username", username.getText().toString());
                 startActivity(login_intent);
+            }
             else
                 Toast.makeText(this, "Invalid login details!!", Toast.LENGTH_SHORT).show();
         }
