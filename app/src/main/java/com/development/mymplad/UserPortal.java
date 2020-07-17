@@ -5,29 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -40,12 +35,31 @@ public class UserPortal extends AppCompatActivity {
     List<String> problem_list;
     List<String> mp_list;
 
+    SharedPreferences preferences;
+    DbHelper helper;
 
     String state_district_json, mps_data_json;
     Spinner spn_state, spn_dis, spn_problem, spn_mp;
-
-    private static final String URL = "https://mymplad.000webhostapp.com/mps.json";
+    EditText edt_problem_desc;
     ArrayAdapter<String> state_adapter, district_adapter, problem_adapter, mp_adapter;
+    User login_user;
+
+    public int getStateIndex(String state){
+        int pos = 0;
+        for(int i = 0; i < states.size(); i++)
+            if(states.get(i).equals(state))
+                pos = i;
+        return pos;
+    }
+
+    public int getDistIndex(String dis){
+        int pos = 0;
+        for(int i = 0; i < states.size(); i++)
+            if(districts.get(i).equals(dis))
+                pos = i;
+        return pos;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +73,21 @@ public class UserPortal extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        edt_problem_desc = findViewById(R.id.edt_problem_desc);
+
+        preferences = getSharedPreferences(LoginActivity.PREF, MODE_PRIVATE);
+        helper = new DbHelper(getApplicationContext());
+        login_user = new User();
+        List<User> list = helper.login(preferences.getString("username", ""), preferences.getString("password", ""));
+        login_user = list.get(0);
         load_state_district_json();
         load_states();
         init_state_spinner();
         load_problem_list();
         init_problem_list();
+
+        //spn_state.setSelection(getStateIndex(login_user.getState()));
+        //spn_dis.setSelection(getDistIndex(login_user.getDistrict()));
 
         spn_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -101,6 +125,13 @@ public class UserPortal extends AppCompatActivity {
             case R.id.mn_settings:
                 Intent i = new Intent(UserPortal.this, UserSettings.class);
                 startActivity(i);
+                break;
+            case R.id.mn_logout:
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                editor.commit();
+                startActivity(new Intent(UserPortal.this, LoginActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -191,9 +222,6 @@ public class UserPortal extends AppCompatActivity {
         }
     }
 
-
-
-
     public void toast(String msg){
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
@@ -207,12 +235,25 @@ public class UserPortal extends AppCompatActivity {
         problem_list.add(new String("Electricity Issue"));
         problem_list.add(new String("Water Issue"));
         problem_list.add(new String("Garbage Issue"));
-        problem_list.add(new String("Cleanliness issue"));
         problem_list.add(new String("Transport Issue"));
     }
 
     public void init_problem_list(){
         problem_adapter = new ArrayAdapter(UserPortal.this, android.R.layout.simple_expandable_list_item_1, problem_list);
         spn_problem.setAdapter(problem_adapter);
+    }
+
+    public void reg_complaint(View view){
+//        public long insert_complaint(int mp_id, String sector, String dist, String state, String title, String description,
+//        String cust_name, String ct_mobile, String ct_address, int status){
+        long result = helper.insert_complaint(
+                spn_mp.getSelectedItem().toString(), spn_problem.getSelectedItem().toString(), spn_dis.getSelectedItem().toString(),
+                spn_state.getSelectedItem().toString(), "Problem related to " + spn_problem.getSelectedItem().toString(),
+                edt_problem_desc.getText().toString(), login_user.getFname() + " " + login_user.getLname(),
+                login_user.getContact(), login_user.getAddress());
+        if(result != -1)
+            toast("Your complaint has been registered!!");
+        else
+            toast("Some unexpected error has occurred!!");
     }
 }

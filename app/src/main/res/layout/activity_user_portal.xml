@@ -104,6 +104,7 @@
             android:layout_below="@id/spn_mp"
             android:background="@drawable/reg_btn_backround"
             android:text="@string/submit_complaint"
+            android:onClick="reg_complaint"
             android:textAllCaps="false"
             android:textColor="@color/col_btn_white"
             android:textSize="18dp" />

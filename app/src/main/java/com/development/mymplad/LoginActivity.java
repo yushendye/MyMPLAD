@@ -3,6 +3,7 @@ package com.development.mymplad;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +17,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
 
     DbHelper helper;
+    static String PREF = "MPLAD_LOGIN";
+    SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,16 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.edt_login_password);
 
         helper = new DbHelper(getApplicationContext());
+        preferences = getSharedPreferences(PREF, MODE_PRIVATE);
         //helper.user_register(1, "chinmay", "shendye", "Upendra", "chinmaester","Maharashtra", "Ratnagiri", "Nachane", "Male", "9975086979", "443434343", "123456");
+
+        if(preferences.contains("username") && preferences.contains("password")){
+            Intent login_intent = new Intent(LoginActivity.this, UserPortal.class);
+            startActivity(login_intent);
+        }
+
+        helper.load_mp_data();
+
     }
 
     public boolean validate(){
@@ -47,7 +59,16 @@ public class LoginActivity extends AppCompatActivity {
             List<User> logged_in_details = helper.login(username.getText().toString(), password.getText().toString());
 
             if(logged_in_details.size() > 0) {
-                login_intent.putExtra("username", username.getText().toString());
+                //login_intent.putExtra("username", username.getText().toString());
+                //login_intent.putExtra("password", password.getText().toString());
+
+                SharedPreferences.Editor data = preferences.edit();
+                data.putString("username", username.getText().toString());
+                data.putString("password", password.getText().toString());
+
+                data.apply();
+                data.commit();
+
                 startActivity(login_intent);
             }
             else

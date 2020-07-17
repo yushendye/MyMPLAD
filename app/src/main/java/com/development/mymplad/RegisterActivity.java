@@ -151,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
             edt_lname.setError("Please enter your last name");
         }
 
-        if(edt_pass1.getText().toString().equals(edt_pass2.getText().toString())){
+        if(!edt_pass1.getText().toString().equals(edt_pass2.getText().toString())){
             valid = false;
             edt_pass2.setError("Password mismatch");
         }
@@ -165,14 +165,32 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void register(View view){
         RadioButton btn = findViewById(rg_gender.getCheckedRadioButtonId());
-
+        long result;
         if(validate()){
             RadioButton gen = findViewById(rg_gender.getCheckedRadioButtonId());
-            helper.user_register(edt_fname.getText().toString(), edt_lname.getText().toString(), edt_mname.getText().toString(),
+            result = helper.user_register(edt_fname.getText().toString(), edt_lname.getText().toString(), edt_mname.getText().toString(),
                     edt_username.getText().toString(), spn_state.getSelectedItem().toString(), spn_city.getSelectedItem().toString(),
                     edt_address.getText().toString(), gen.getText().toString(), edt_phone.getText().toString(),
                     edt_adhar.getText().toString(), edt_pass1.getText().toString()
                     );
         }
+        else
+            result = 0;
+
+        if(result != -1) {
+            clear();
+            toast("Registered successfully");
+            edt_fname.setFocusable(true);
+        }
+    }
+
+    public void clear(){
+        edt_fname.setText("");
+        edt_lname.setText("");
+        edt_mname.setText("");
+        edt_phone.setText("");
+        edt_address.setText("");
+        edt_pass2.setText("");
+        edt_pass1.setText("");
     }
 }

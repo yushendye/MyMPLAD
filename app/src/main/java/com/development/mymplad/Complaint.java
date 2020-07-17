@@ -1,11 +1,56 @@
 package com.development.mymplad;
 
 public class Complaint {
+    String mp_id;
+    String sector;
     int id;
     String url;
     String title;
     String description;
     String location;
+    String contact;
+    String customer_name;
+    int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMp_id() {
+        return mp_id;
+    }
+
+    public void setMp_id(String mp_id) {
+        this.mp_id = mp_id;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
+    }
 
     public Complaint() {
     }
