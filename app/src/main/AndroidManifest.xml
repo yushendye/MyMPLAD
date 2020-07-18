@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ComplaintDetails"></activity>
         <activity android:name=".ComplaintToMp">
-
         </activity>
         <activity android:name=".MPLogin" />
         <activity android:name=".UserSettings" />

@@ -31,7 +31,9 @@
     <string name="sample_password">Default MP Login\nusername : manmohan_singh,\nPassword: manmohan_singh123</string>
     <string name="complaint_head">Complaint Title</string>
     <string name="complaint_desc">Complaint Description</string>
-    <string name="complain_loc">Comlaint Location</string>
+    <string name="complain_loc">Complaint Location</string>
     <string name="complaint_res">Complaint Resolved</string>
     <string name="complaint_wait">Put on Waiting</string>
+    <string name="cust_name">Name of User</string>
+    <string name="cust_con">Contact of User</string>
 </resources>

@@ -34,7 +34,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ComplaintViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ComplaintViewHolder holder, final int position) {
         Complaint complaint = complaintList.get(position);
 
         Picasso.get().load(complaint.getUrl()).into(holder.complaint_logo);
@@ -46,6 +46,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ComplaintDetails.class);
+                intent.putExtra("complaint_id", position);
                 v.getContext().startActivity(intent);
             }
         });

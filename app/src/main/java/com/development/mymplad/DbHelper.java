@@ -101,7 +101,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "ct_name string, "
                 + "ct_mobile string, "
                 + "ct_address string, " +
-                "status int" +
+                "status int" + ", work_district string" +
                 ")";
         db.execSQL(CREATE_LOGIN);
         Log.d("Login Table", "created successfully!!");
@@ -175,6 +175,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(SUGG_COL_MP_ID, mp_id);
         values.put(SUGG_COL_WORK_SEC, sector);
         values.put(SUGG_COL_TITLE, title);
+        values.put(SUGG_COL_DIS, dist);
         values.put(SUGG_COL_DESC, description);
         values.put(SUGG_COL_CT_NAME, cust_name);
         values.put(SUGG_COL_CT_MOBILE, ct_mobile);
@@ -187,7 +188,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public List<Complaint> get_complaints(String mp_name){
         List<Complaint> complaints = new ArrayList<>();
-        String qry = "select * from " + TBL_MP_SUGGESTION + " where " + SUGG_COL_MP_ID + " like '%" +mp_name + "%'";
+        String qry = "select * from " + TBL_MP_SUGGESTION + " where " + SUGG_COL_MP_ID + " like '%" +mp_name + "%' and status = 0";
 
         SQLiteDatabase database = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -204,9 +205,8 @@ public class DbHelper extends SQLiteOpenHelper {
             complaint.setDescription(cursor.getString(4));
             complaint.setCustomer_name(cursor.getString(5));
             complaint.setContact(cursor.getString(6));
-            complaint.setLocation(cursor.getString(7));
+            complaint.setLocation(cursor.getString(8) + ", " + cursor.getString(7));
             complaint.setStatus(cursor.getInt(7));
-
             String url = "";
             switch (cursor.getString(2)){
                 case "Electricity Issue":
@@ -299,5 +299,65 @@ public class DbHelper extends SQLiteOpenHelper {
         Toast.makeText(context, "Got " + times + " entries!!", Toast.LENGTH_LONG).show();
     }
 
+    public Complaint get_complaint(int id) {
+        List<Complaint> complaints = new ArrayList<>();
+        String qry = "select * from " + TBL_MP_SUGGESTION + " where " + SUGG_COL_SUGG_ID + " = " + id;
+
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        Cursor cursor = database.rawQuery(qry, null);
+        cursor.moveToFirst();
+
+        Complaint complaint = new Complaint();
+        while (!cursor.isAfterLast()) {
+            complaint.setId(cursor.getInt(0));
+            complaint.setMp_id(cursor.getString(1));
+            complaint.setSector(cursor.getString(2));
+            complaint.setTitle(cursor.getString(3));
+            complaint.setDescription(cursor.getString(4));
+            complaint.setCustomer_name(cursor.getString(5));
+            complaint.setContact(cursor.getString(6));
+            complaint.setLocation(cursor.getString(7));
+            complaint.setStatus(cursor.getInt(7));
+
+            String url = "";
+            switch (cursor.getString(2)) {
+                case "Electricity Issue":
+                    url = "https://image.freepik.com/free-photo/sun-setting-silhouette-electricity-pylons_1127-3239.jpg";
+                    break;
+                case "Water Issue":
+                    url = "https://image.freepik.com/free-photo/close-up-water-splashes_23-2147608472.jpg";
+                    break;
+                case "Garbage Issue":
+                    url = "https://image.freepik.com/free-vector/garbage-dump-with-rubbish-recycling-park-different-types-waste-environmental-conservation-infographics_256892-9.jpg";
+                    break;
+                case "Transport Issue":
+                    url = "https://image.freepik.com/free-vector/passengers-waiting-public-transport-bus-stop_74855-5282.jpg";
+                    break;
+            }
+            complaint.setUrl(url);
+            cursor.moveToNext();
+        }
+        return complaint;
+    }
+
+    public long resolve(int id){
+        SQLiteDatabase database = getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SUGG_COL_CT_STATUS, 1);
+        long res = database.update(TBL_MP_SUGGESTION, values, SUGG_COL_SUGG_ID + "=" + id, null);
+
+        return res;
+    }
+
+    public long put_on_wait(int id){
+        SQLiteDatabase database = getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SUGG_COL_CT_STATUS, 0);
+        long res = database.update(TBL_MP_SUGGESTION, values, SUGG_COL_SUGG_ID + "=" + id, null);
+
+        return res;
+    }
 
 }
