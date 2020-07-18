@@ -76,12 +76,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void init_state_spinner(){
-        state_adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_item, state_list);
+        state_adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_expandable_list_item_1, state_list);
         spn_state.setAdapter(state_adapter);
     }
 
     public void init_district_spinner(){
-        district_adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_item, city_list);
+        district_adapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_expandable_list_item_1, city_list);
         spn_city.setAdapter(district_adapter);
     }
 
@@ -93,9 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             int word;
-
+            state_district_json = "";
             while ((word = reader.read()) != -1){
-                state_district_json += String.valueOf((char) word);
+                state_district_json = state_district_json.concat(String.valueOf((char) word));
             }
         }catch (Exception e){
             toast(e.getMessage());
@@ -146,6 +146,10 @@ public class RegisterActivity extends AppCompatActivity {
             edt_fname.setError("Please enter your first name");
         }
 
+        if(edt_username.getText().toString().isEmpty() || edt_username.getText().toString().contains(" ")){
+            valid = false;
+            edt_username.setError("Please fill this field without any space");
+        }
         if(edt_lname.getText().toString().isEmpty()) {
             valid = false;
             edt_lname.setError("Please enter your last name");
@@ -159,6 +163,17 @@ public class RegisterActivity extends AppCompatActivity {
         if(edt_phone.getText().toString().isEmpty()){
             valid = false;
             edt_phone.setError("Please enter your phone number");
+        }
+
+        if(edt_pass1.getText().toString().isEmpty() || edt_pass2.getText().toString().isEmpty()){
+            valid = false;
+            edt_pass1.setError("Please enter your password");
+            edt_pass2.setError("Please re-enter the password");
+        }
+
+        if(! edt_pass1.getText().toString().equals(edt_pass2.getText().toString())){
+            valid = false;
+            edt_pass2.setError("Please re-enter the password");
         }
         return valid;
     }
@@ -183,7 +198,7 @@ public class RegisterActivity extends AppCompatActivity {
             );
         }
         else
-            result = 0;
+            result = -1;
 
         if(result != -1) {
             clear();

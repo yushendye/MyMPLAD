@@ -18,8 +18,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
-
 public class DbHelper extends SQLiteOpenHelper {
     Context context;
 
@@ -77,20 +75,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         String CREATE_MP_LOGIN = "create table " + TBL_MP_LOGIN + "(" + COL_MP__ID + " string, " + COL_MP_USERNAME + " string unique,"
                 + COL_MP_PWD + " string, " + COL_MP_NAME + " string)";
-                ;
-        /*String CREATE_SUGGESTION = "create table " + TBL_MP_SUGGESTION + "(" +
-                SUGG_COL_SUGG_ID + INTEGER + "autoincrement" + PRIMARY +
-                SUGG_COL_MP_ID  + INTEGER + "," +
-                SUGG_COL_WORK_SEC + STRING +
-                SUGG_COL_DIS + STRING  +
-                SUGG_COL_ST + STRING +
-                SUGG_COL_TITLE + STRING  +
-                SUGG_COL_DESC + STRING  +
-                SUGG_COL_CT_NAME + STRING  +
-                SUGG_COL_CT_MOBILE + STRING +
-                SUGG_COL_CT_ADD + STRING +
-                SUGG_COL_CT_STATUS + "STRING" +
-         ")";*/
 
         String CREATE_SUGGESTION = "create table tbl_Suggestion(" +
                 "suggestion_id integer primary key autoincrement, " +
@@ -156,6 +140,7 @@ public class DbHelper extends SQLiteOpenHelper {
             user_details.add(user);
             result.moveToNext();
         }
+        result.close();
         db.close();
         return user_details;
     }
@@ -255,7 +240,9 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             mps_data_json = reader.readLine();
             reader.close();
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         try {
             JSONObject object = new JSONObject(mps_data_json);
@@ -296,7 +283,6 @@ public class DbHelper extends SQLiteOpenHelper {
             times++;
         }
         database.close();
-        Toast.makeText(context, "Got " + times + " entries!!", Toast.LENGTH_LONG).show();
     }
 
     public Complaint get_complaint(int id) {
@@ -339,6 +325,8 @@ public class DbHelper extends SQLiteOpenHelper {
             complaint.setUrl(url);
             cursor.moveToNext();
         }
+        cursor.close();
+        database.close();
         return complaint;
     }
 
@@ -347,7 +335,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(SUGG_COL_CT_STATUS, 1);
         long res = database.update(TBL_MP_SUGGESTION, values, SUGG_COL_SUGG_ID + "=" + id, null);
-
+        database.close();
         return res;
     }
 
@@ -356,7 +344,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(SUGG_COL_CT_STATUS, 0);
         long res = database.update(TBL_MP_SUGGESTION, values, SUGG_COL_SUGG_ID + "=" + id, null);
-
+        database.close();
         return res;
     }
 

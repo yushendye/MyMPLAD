@@ -36,8 +36,12 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(login_intent);
         }
 
-        helper.load_mp_data();
+        if(preferences.contains("mp_name")){
+            Intent mp_login_intent = new Intent(LoginActivity.this, ComplaintToMp.class);
+            startActivity(mp_login_intent);
+        }
 
+        helper.load_mp_data();
     }
 
     public boolean validate(){
@@ -59,9 +63,6 @@ public class LoginActivity extends AppCompatActivity {
             List<User> logged_in_details = helper.login(username.getText().toString(), password.getText().toString());
 
             if(logged_in_details.size() > 0) {
-                //login_intent.putExtra("username", username.getText().toString());
-                //login_intent.putExtra("password", password.getText().toString());
-
                 SharedPreferences.Editor data = preferences.edit();
                 data.putString("username", username.getText().toString());
                 data.putString("password", password.getText().toString());
@@ -70,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 data.commit();
 
                 startActivity(login_intent);
+                finish();
             }
             else
                 Toast.makeText(this, "Invalid login details!!", Toast.LENGTH_SHORT).show();

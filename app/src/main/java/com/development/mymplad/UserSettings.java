@@ -140,9 +140,9 @@ public class UserSettings extends AppCompatActivity {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             int word;
-
+            state_district_json = "";
             while ((word = reader.read()) != -1){
-                state_district_json += String.valueOf((char) word);
+                state_district_json = state_district_json.concat(String.valueOf((char) word));
             }
         }catch (Exception e){
             toast(e.getMessage());
@@ -162,6 +162,47 @@ public class UserSettings extends AppCompatActivity {
             toast("JSON exception!!");
         }
     }
+
+    public boolean validate(){
+        boolean valid = true;
+
+        if(edt_fname.getText().toString().isEmpty()) {
+            valid = false;
+            edt_fname.setError("Please enter your first name");
+        }
+
+        if(edt_username.getText().toString().isEmpty() || edt_username.getText().toString().contains(" ")){
+            valid = false;
+            edt_username.setError("Please fill this field without any space");
+        }
+        if(edt_lname.getText().toString().isEmpty()) {
+            valid = false;
+            edt_lname.setError("Please enter your last name");
+        }
+
+        if(!edt_pass1.getText().toString().equals(edt_pass2.getText().toString())){
+            valid = false;
+            edt_pass2.setError("Password mismatch");
+        }
+
+        if(edt_phone.getText().toString().isEmpty()){
+            valid = false;
+            edt_phone.setError("Please enter your phone number");
+        }
+
+        if(edt_pass1.getText().toString().isEmpty() || edt_pass2.getText().toString().isEmpty()){
+            valid = false;
+            edt_pass1.setError("Please enter your password");
+            edt_pass2.setError("Please re-enter the password");
+        }
+
+        if(! edt_pass1.getText().toString().equals(edt_pass2.getText().toString())){
+            valid = false;
+            edt_pass2.setError("Please re-enter the password");
+        }
+        return valid;
+    }
+
 
     public void load_districts(String state){
         city_list = new ArrayList<>();
@@ -190,12 +231,16 @@ public class UserSettings extends AppCompatActivity {
         String p = preferences.getString("password", "");
         RadioButton btn = findViewById(rg_gender.getCheckedRadioButtonId());
         String gender = btn.getText().toString();
-        long result = helper.update_settings(u, p, edt_fname.getText().toString(), edt_lname.getText().toString(), edt_mname.getText().toString(), edt_username.getText().toString(), spn_state.getSelectedItem().toString(), spn_city.getSelectedItem().toString(), edt_address.getText().toString(), gender, edt_phone.getText().toString(), edt_adhar.getText().toString(), edt_pass1.getText().toString());
 
+        long result = -1;
+        if(validate()) {
+            result = helper.update_settings(u, p, edt_fname.getText().toString(), edt_lname.getText().toString(), edt_mname.getText().toString(), edt_username.getText().toString(), spn_state.getSelectedItem().toString(), spn_city.getSelectedItem().toString(), edt_address.getText().toString(), gender, edt_phone.getText().toString(), edt_adhar.getText().toString(), edt_pass1.getText().toString());
+        }
         if(result != -1) {
             toast("Settings updated successfully!!, Please login again");
             SharedPreferences.Editor editor = preferences.edit();
             editor.clear();
+            editor.apply();
             editor.commit();
             startActivity(new Intent(UserSettings.this, LoginActivity.class));
             finish();

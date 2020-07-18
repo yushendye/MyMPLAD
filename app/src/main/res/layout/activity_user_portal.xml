@@ -2,12 +2,12 @@
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="7dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         tools:context=".UserPortal">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/txt_st"
             android:layout_marginTop="17pt"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:layout_below="@id/toolbar"
             android:text="@string/state"
             android:textColor="@color/col_txt_black"
@@ -30,19 +30,19 @@
             android:layout_height="35dp"
             android:gravity="center"
             android:dropDownWidth="match_parent"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:hint="@string/city" />
         <TextView
             android:id="@+id/txt_dis"
-            android:layout_marginTop="7dp"
-            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:layout_below="@id/spn_state"
             android:text="@string/city"
             android:textColor="@color/col_txt_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Spinner
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/txt_dis"
             android:id="@+id/spn_city"
             android:dropDownWidth="match_parent"
@@ -51,15 +51,15 @@
             android:layout_height="35dp"/>
         <TextView
             android:id="@+id/txt_problem"
-            android:layout_marginTop="7dp"
-            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
             android:layout_below="@id/spn_city"
             android:text="@string/problem"
             android:textColor="@color/col_txt_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Spinner
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/txt_problem"
             android:id="@+id/spn_problem"
             android:dropDownWidth="match_parent"
@@ -67,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp" />
         <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/til_desc"
             android:layout_width="match_parent"
             android:layout_below="@id/spn_problem"
@@ -82,14 +83,14 @@
         <TextView
             android:id="@+id/txt_mp"
             android:layout_marginTop="7dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:layout_below="@id/til_desc"
             android:text="@string/select_mp"
             android:textColor="@color/col_txt_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Spinner
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/txt_mp"
             android:id="@+id/spn_mp"
             android:dropDownWidth="match_parent"
@@ -98,6 +99,7 @@
             android:layout_height="35dp" />
 
         <Button
+            android:layout_marginTop="15dp"
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,6 +109,6 @@
             android:onClick="reg_complaint"
             android:textAllCaps="false"
             android:textColor="@color/col_btn_white"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 </ScrollView>

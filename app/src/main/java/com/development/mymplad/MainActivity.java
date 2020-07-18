@@ -9,9 +9,6 @@ import android.os.Handler;
 import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
-    ProgressBar bar;
-    Handler handler = new Handler();
-    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +20,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
             }
-        }, 500);
+        }, 300);
     }
 }

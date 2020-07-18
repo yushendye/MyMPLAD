@@ -39,8 +39,10 @@ public class MPLogin extends AppCompatActivity {
         if(!mp_name.isEmpty()) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("mp_name",mp_name);
+            editor.apply();
             editor.commit();
             startActivity(intent);
+            finish();
         }
         else
             Toast.makeText(getApplicationContext(), "Invalid credentials!!", Toast.LENGTH_LONG).show();
