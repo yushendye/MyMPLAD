@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/decent_back"
-    tools:context=".RegisterActivity">
+    tools:context=".UserSettings">
 
     <ScrollView
         android:id="@+id/sv_scrollview"
@@ -190,6 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/til_pass2"
                 android:text="@string/save_changes"
+                android:onClick="save_changes"
                 android:textColor="@color/col_btn_white"
                 android:textSize="18dp"
                 android:textAllCaps="false"/>

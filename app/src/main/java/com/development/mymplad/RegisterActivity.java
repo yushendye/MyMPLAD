@@ -45,10 +45,12 @@ public class RegisterActivity extends AppCompatActivity {
         edt_fname = findViewById(R.id.edt_fname);
         edt_lname = findViewById(R.id.edt_lname);
         edt_mname = findViewById(R.id.edt_mname);
+
         edt_username = findViewById(R.id.edt_username);
         edt_address = findViewById(R.id.edt_address);
         edt_phone = findViewById(R.id.edt_phone);
         edt_adhar = findViewById(R.id.adhar);
+
         edt_pass1 = findViewById(R.id.edt_pass1);
         edt_pass2 = findViewById(R.id.pass2);
         rg_gender = findViewById(R.id.rg_gender);
@@ -62,10 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
                 load_districts(state_selected);
                 init_district_spinner();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         spn_city = findViewById(R.id.spn_city);
@@ -135,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void toast(String msg){
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
     public boolean validate(){
@@ -164,15 +164,23 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void register(View view){
-        RadioButton btn = findViewById(rg_gender.getCheckedRadioButtonId());
         long result;
         if(validate()){
+            toast("Address : " + edt_address.getText().toString());
             RadioButton gen = findViewById(rg_gender.getCheckedRadioButtonId());
-            result = helper.user_register(edt_fname.getText().toString(), edt_lname.getText().toString(), edt_mname.getText().toString(),
-                    edt_username.getText().toString(), spn_state.getSelectedItem().toString(), spn_city.getSelectedItem().toString(),
-                    edt_address.getText().toString(), gen.getText().toString(), edt_phone.getText().toString(),
-                    edt_adhar.getText().toString(), edt_pass1.getText().toString()
-                    );
+            result = helper.user_register(
+                                edt_fname.getText().toString(),
+                                edt_lname.getText().toString(),
+                                edt_mname.getText().toString(),
+                                edt_username.getText().toString(),
+                                spn_state.getSelectedItem().toString(),
+                                spn_city.getSelectedItem().toString(),
+                                edt_address.getText().toString(),
+                                gen.getText().toString(),
+                                edt_phone.getText().toString(),
+                                edt_adhar.getText().toString(),
+                                edt_pass1.getText().toString()
+            );
         }
         else
             result = 0;

@@ -85,10 +85,6 @@ public class UserPortal extends AppCompatActivity {
         init_state_spinner();
         load_problem_list();
         init_problem_list();
-
-        //spn_state.setSelection(getStateIndex(login_user.getState()));
-        //spn_dis.setSelection(getDistIndex(login_user.getDistrict()));
-
         spn_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -99,6 +95,8 @@ public class UserPortal extends AppCompatActivity {
 
                 load_mps_data(state_selected);
                 init_mp_spinner();
+
+                spn_dis.setSelection(getDistIndex(login_user.getDistrict()));
             }
 
             @Override
@@ -106,6 +104,7 @@ public class UserPortal extends AppCompatActivity {
 
             }
         });
+        spn_state.setSelection(getStateIndex(login_user.getState()));
     }
 
     @Override

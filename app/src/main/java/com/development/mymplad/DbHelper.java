@@ -149,7 +149,7 @@ public class DbHelper extends SQLiteOpenHelper {
             user.setState(result.getString(5));
             user.setGender(result.getString(6));
             user.setDistrict(result.getString(7));
-            user.setAddress(result.getString(9));
+            user.setAddress(result.getString(8));
             user.setAadhar(result.getString(9));
             user.setContact(result.getString(10));
             user.setPassword(result.getString(11));
@@ -358,6 +358,28 @@ public class DbHelper extends SQLiteOpenHelper {
         long res = database.update(TBL_MP_SUGGESTION, values, SUGG_COL_SUGG_ID + "=" + id, null);
 
         return res;
+    }
+
+    public long  update_settings(String u, String p, String fname, String lname, String mname, String username, String state, String district, String address, String gender, String contact, String aadhar, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_FNAME, fname);
+        values.put(COL_LNAME, lname);
+        values.put(COL_MNAME, mname);
+        values.put(COL_USERNAME, username);
+        values.put(COL_STATE, state);
+        values.put(COL_DISTRIACT, district);
+        values.put(COL_ADDRESS, address);
+        values.put(COL_CONTACT, contact);
+        values.put(COL_AADHAR, aadhar);
+        values.put(COL_USERNAME, username);
+        values.put(COL_GEN, gender);
+        values.put(COL_PASSWORD, password);
+
+        long inserted = db.update(TBL_LOGIN_TABLE, values, COL_USERNAME + " like '" + u + "' and password like '" + p + "'", null);
+        db.close();
+        return inserted;
     }
 
 }
