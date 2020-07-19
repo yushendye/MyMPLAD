@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.transform.Result;
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ComplaintViewHolder> {
     List<Complaint> complaintList;
@@ -35,7 +39,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
 
     @Override
     public void onBindViewHolder(@NonNull ComplaintViewHolder holder, final int position) {
-        Complaint complaint = complaintList.get(position);
+        final Complaint complaint = complaintList.get(position);
 
         Picasso.get().load(complaint.getUrl()).into(holder.complaint_logo);
         holder.title.setText(complaint.getTitle());
@@ -46,7 +50,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ComplaintDetails.class);
-                intent.putExtra("complaint_id", position);
+                intent.putExtra("complaint_id", complaint.getId());
                 v.getContext().startActivity(intent);
             }
         });
@@ -70,4 +74,35 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
             location = itemView.findViewById(R.id.complaint_loc);
         }
     }
+
+    public Filter getFilter(){
+        return complaint_filter;
+    }
+
+    private Filter complaint_filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Complaint> list = new ArrayList<>();
+            if(constraint.toString().isEmpty())
+                list.addAll(complaintList);
+            else{
+                String pattern = constraint.toString().toLowerCase();
+                for(Complaint complaint : complaintList){
+                    if(complaint.getTitle().toLowerCase().equals(pattern) || complaint.getTitle().toLowerCase().contains(pattern))
+                        list.add(complaint);
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = list;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            complaintList.clear();
+            complaintList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

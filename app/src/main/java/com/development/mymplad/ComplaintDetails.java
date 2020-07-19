@@ -33,7 +33,7 @@ public class ComplaintDetails extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra("complaint_id", 1);
 
-        Complaint complaint = helper.get_complaint(id + 1);
+        Complaint complaint = helper.get_complaint(id);
 
         Picasso.get().load(complaint.getUrl()).into(imv_logo);
         det_title.setText(complaint.getTitle());

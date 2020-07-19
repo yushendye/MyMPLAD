@@ -190,7 +190,7 @@ public class DbHelper extends SQLiteOpenHelper {
             complaint.setDescription(cursor.getString(4));
             complaint.setCustomer_name(cursor.getString(5));
             complaint.setContact(cursor.getString(6));
-            complaint.setLocation(cursor.getString(8) + ", " + cursor.getString(7));
+            complaint.setLocation(cursor.getString(9) + ", " + cursor.getString(7));
             complaint.setStatus(cursor.getInt(7));
             String url = "";
             switch (cursor.getString(2)){

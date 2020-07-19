@@ -54,7 +54,7 @@ public class UserPortal extends AppCompatActivity {
 
     public int getDistIndex(String dis){
         int pos = 0;
-        for(int i = 0; i < states.size(); i++)
+        for(int i = 0; i < districts.size(); i++)
             if(districts.get(i).equals(dis))
                 pos = i;
         return pos;
@@ -96,7 +96,7 @@ public class UserPortal extends AppCompatActivity {
                 load_mps_data(state_selected);
                 init_mp_spinner();
 
-                spn_dis.setSelection(getDistIndex(login_user.getDistrict()));
+                spn_dis.setSelection(getDistIndex(login_user.getState()));
             }
 
             @Override

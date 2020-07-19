@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,20 @@ public class ComplaintToMp extends AppCompatActivity {
         setContentView(R.layout.activity_complaint_to_mp);
 
         sv_searchview = findViewById(R.id.sv_searchview);
+
+        sv_searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(! newText.isEmpty())
+                    complaintAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         rcv_complaints = findViewById(R.id.rcv_complaints);
 
         helper = new DbHelper(getApplicationContext());
@@ -38,6 +53,9 @@ public class ComplaintToMp extends AppCompatActivity {
     public void load_complaints(){
         complaintList = new ArrayList<>();
         complaintList = helper.get_complaints(mp_name);
+
+        if(complaintList.size() <= 0)
+            Toast.makeText(this, "No Pending Complaints found!!", Toast.LENGTH_SHORT).show();
     }
 
     public void init_complaints_rcv(){

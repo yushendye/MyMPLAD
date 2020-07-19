@@ -116,7 +116,7 @@ public class UserSettings extends AppCompatActivity {
 
     public int getDistIndex(String dis){
         int pos = 0;
-        for(int i = 0; i < state_list.size(); i++)
+        for(int i = 0; i < city_list.size(); i++)
             if(city_list.get(i).equals(dis))
                 pos = i;
         return pos;
@@ -159,7 +159,7 @@ public class UserSettings extends AppCompatActivity {
                 state_list.add(state.getString("state"));
             }
         }catch (JSONException jsonex){
-            toast("JSON exception!!");
+            toast(jsonex.getMessage());
         }
     }
 
@@ -218,7 +218,7 @@ public class UserSettings extends AppCompatActivity {
                 }
             }
         }catch (JSONException jsonex){
-            toast("JSON exception!! at districts");
+            toast(jsonex.getMessage());
         }
     }
 
