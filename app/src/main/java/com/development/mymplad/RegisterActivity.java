@@ -215,5 +215,6 @@ public class RegisterActivity extends AppCompatActivity {
         edt_address.setText("");
         edt_pass2.setText("");
         edt_pass1.setText("");
+        edt_username.setText("");
     }
 }
