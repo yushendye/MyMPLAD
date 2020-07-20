@@ -2,17 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     android:layout_height="match_parent"
+    android:background="@drawable/decent_back"
     tools:context=".ComplaintToMp">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/mp_toolbar"/>
 
     <SearchView
+        android:layout_below="@id/toolbar"
         android:id="@+id/sv_searchview"
+        android:padding="10dp"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:padding="10dp"
         android:id="@+id/rcv_complaints"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

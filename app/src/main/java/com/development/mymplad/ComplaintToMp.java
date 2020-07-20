@@ -1,14 +1,20 @@
 package com.development.mymplad;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +23,8 @@ public class ComplaintToMp extends AppCompatActivity {
     List<Complaint> complaintList;
     RecyclerView rcv_complaints;
     SearchView sv_searchview;
+    Toolbar toolbar;
+
     ComplaintAdapter complaintAdapter;
     SharedPreferences preferences;
     String PREF = LoginActivity.PREF;
@@ -28,6 +36,9 @@ public class ComplaintToMp extends AppCompatActivity {
         setContentView(R.layout.activity_complaint_to_mp);
 
         sv_searchview = findViewById(R.id.sv_searchview);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         sv_searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -65,5 +76,28 @@ public class ComplaintToMp extends AppCompatActivity {
         rcv_complaints.setLayoutManager(layoutManager);
         rcv_complaints.setItemAnimator(new DefaultItemAnimator());
         rcv_complaints.setAdapter(complaintAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mp_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.mp_logout:
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                editor.commit();
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

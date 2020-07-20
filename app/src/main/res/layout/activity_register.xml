@@ -24,6 +24,7 @@
                     android:layout_marginTop="17dp"
                     android:id="@+id/edt_fname"
                     android:inputType="textPersonName"
+                    android:drawableLeft="@drawable/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name"/>
@@ -39,6 +40,7 @@
                 android:layout_marginTop="7dp"
                 android:id="@+id/edt_lname"
                 android:layout_width="match_parent"
+                android:drawableLeft="@drawable/username"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:hint="@string/last_name"/>
@@ -54,6 +56,7 @@
                     android:id="@+id/edt_mname"
                     android:layout_width="match_parent"
                     android:inputType="textPersonName"
+                    android:drawableLeft="@drawable/username"
                     android:layout_height="wrap_content"
                     android:hint="@string/middle_name"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,11 +72,13 @@
                     android:layout_below="@+id/til_mname"
                     android:id="@+id/edt_username"
                     android:layout_width="match_parent"
+                    android:drawableLeft="@drawable/username"
                     android:layout_height="wrap_content"
                     android:hint="@string/username_prompt"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:drawableLeft="@drawable/location"
                 android:id="@+id/txt_st"
                 android:layout_marginTop="17pt"
                 android:textSize="15sp"
@@ -94,6 +99,7 @@
                 android:hint="@string/state"/>
 
             <TextView
+                android:drawableLeft="@drawable/location"
                 android:id="@+id/txt_city"
                 android:layout_marginTop="17pt"
                 android:textSize="15sp"
@@ -124,6 +130,7 @@
                     android:lines="3"
                     android:id="@+id/edt_address"
                     android:layout_width="match_parent"
+                    android:drawableLeft="@drawable/location"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -163,6 +170,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_marginTop="7dp"
                     android:id="@+id/edt_phone"
+                    android:drawableLeft="@drawable/contact"
                     android:inputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -178,6 +186,7 @@
                     android:layout_marginTop="7dp"
                     android:id="@+id/adhar"
                     android:inputType="number"
+                    android:drawableLeft="@drawable/identity"
                     android:layout_width="match_parent"
                     android:hint="@string/adhar"
                     android:layout_height="wrap_content"/>
@@ -192,6 +201,7 @@
                     android:layout_marginTop="7dp"
                     android:inputType="textPassword"
                     android:id="@+id/edt_pass1"
+                    android:drawableLeft="@drawable/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"/>
@@ -207,6 +217,7 @@
                     android:layout_below="@+id/til_pass1"
                     android:id="@+id/pass2"
                     android:inputType="textPassword"
+                    android:drawableLeft="@drawable/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/repass"/>

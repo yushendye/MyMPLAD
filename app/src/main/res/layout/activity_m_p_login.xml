@@ -15,6 +15,7 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:drawableLeft="@drawable/username"
             android:id="@+id/edt_mp_login_username"
             android:layout_height="match_parent"
             android:hint="@string/username"/>
@@ -30,6 +31,7 @@
             android:id="@+id/edt_mp_login_password"
             android:layout_height="match_parent"
             android:inputType="textPassword"
+            android:drawableLeft="@drawable/password"
             android:hint="@string/password"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button

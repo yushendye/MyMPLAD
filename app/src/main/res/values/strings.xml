@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My MPLAD</string>
     <string name="username">Username</string>
+    <string name="mp_toolbar">Complaints for MP</string>
     <string name="developer">Developed by Yogeshwar Upendra Shendye</string>
     <string name="logo">Just Logo Image, Captured from internet!!</string>
     <string name="password">Password</string>

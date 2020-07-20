@@ -181,7 +181,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void register(View view){
         long result;
         if(validate()){
-            toast("Address : " + edt_address.getText().toString());
             RadioButton gen = findViewById(rg_gender.getCheckedRadioButtonId());
             result = helper.user_register(
                                 edt_fname.getText().toString(),
@@ -216,5 +215,6 @@ public class RegisterActivity extends AppCompatActivity {
         edt_pass2.setText("");
         edt_pass1.setText("");
         edt_username.setText("");
+        edt_adhar.setText("");
     }
 }

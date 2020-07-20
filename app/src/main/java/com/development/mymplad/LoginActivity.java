@@ -34,11 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         if(preferences.contains("username") && preferences.contains("password")){
             Intent login_intent = new Intent(LoginActivity.this, UserPortal.class);
             startActivity(login_intent);
+            finish();
         }
 
         if(preferences.contains("mp_name")){
             Intent mp_login_intent = new Intent(LoginActivity.this, ComplaintToMp.class);
             startActivity(mp_login_intent);
+            finish();
         }
 
         helper.load_mp_data();

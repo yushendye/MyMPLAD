@@ -18,11 +18,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_fname"
+                android:layout_marginTop="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_marginTop="17dp"
                     android:id="@+id/edt_fname"
+                    android:drawableLeft="@drawable/username"
                     android:inputType="textPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -33,6 +35,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_lname"
                 android:layout_width="match_parent"
+                android:layout_marginTop="7dp"
                 android:layout_below="@+id/til_fname"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
@@ -40,6 +43,7 @@
                     android:id="@+id/edt_lname"
                     android:layout_width="match_parent"
                     android:inputType="textPersonName"
+                    android:drawableLeft="@drawable/username"
                     android:layout_height="wrap_content"
                     android:hint="@string/last_name"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -47,12 +51,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_mname"
                 android:layout_below="@id/til_lname"
+                android:layout_marginTop="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
                     android:inputType="textPersonName"
                     android:layout_marginTop="7dp"
                     android:id="@+id/edt_mname"
+                    android:drawableLeft="@drawable/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/middle_name"/>
@@ -62,35 +68,62 @@
                 android:id="@+id/til_username"
                 android:layout_below="@id/til_mname"
                 android:layout_width="match_parent"
+                android:layout_marginTop="7dp"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_marginTop="7dp"
                     android:layout_below="@+id/til_mname"
                     android:id="@+id/edt_username"
+                    android:drawableLeft="@drawable/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter your username"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/spn_city"
+            <TextView
+                android:drawableLeft="@drawable/location"
+                android:id="@+id/txt_st"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp"
+                android:layout_below="@id/til_username"
+                android:text="@string/state"
+                android:textColor="@color/col_txt_black"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:gravity="center"
-                android:layout_below="@+id/spn_state"
-                android:dropDownWidth="match_parent"
-                android:layout_marginTop="7dp"
-                android:hint="@string/city" />
+                android:layout_height="wrap_content"/>
+
             <Spinner
                 android:layout_marginTop="7dp"
-                android:layout_below="@+id/til_username"
+                android:layout_below="@+id/txt_st"
                 android:id="@+id/spn_state"
                 android:dropDownWidth="match_parent"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:hint="@string/state"/>
+
+            <TextView
+                android:drawableLeft="@drawable/location"
+                android:id="@+id/txt_city"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp"
+                android:layout_below="@id/spn_state"
+                android:text="@string/city"
+                android:textColor="@color/col_txt_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spn_city"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:layout_below="@+id/txt_city"
+                android:dropDownWidth="match_parent"
+                android:layout_marginTop="7dp"
+                android:drawableLeft="@drawable/username"
+                android:hint="@string/city" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_address"
@@ -101,13 +134,14 @@
                     android:layout_marginTop="7dp"
                     android:lines="3"
                     android:id="@+id/edt_address"
+                    android:drawableLeft="@drawable/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@id/til_address"
                 android:textColor="@color/col_txt_black"
                 android:textSize="18sp"
@@ -135,11 +169,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_phone"
                 android:layout_below="@id/rg_gender"
+                android:layout_marginTop="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_marginTop="7dp"
                     android:id="@+id/edt_phone"
+                    android:drawableLeft="@drawable/contact"
                     android:inputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -148,6 +184,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_adhar"
+                android:layout_marginTop="7dp"
                 android:layout_below="@id/til_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -156,12 +193,14 @@
                     android:id="@+id/adhar"
                     android:inputType="number"
                     android:layout_width="match_parent"
+                    android:drawableLeft="@drawable/identity"
                     android:hint="@string/adhar"
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_pass1"
+                android:layout_marginTop="7dp"
                 android:layout_width="match_parent"
                 android:layout_below="@+id/til_adhar"
                 android:layout_height="wrap_content">
@@ -170,12 +209,14 @@
                     android:inputType="textPassword"
                     android:id="@+id/edt_pass1"
                     android:layout_width="match_parent"
+                    android:drawableLeft="@drawable/password"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_below="@id/til_pass1"
+                android:layout_marginTop="7dp"
                 android:id="@+id/til_pass2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -183,6 +224,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_below="@+id/til_pass1"
                     android:id="@+id/pass2"
+                    android:drawableLeft="@drawable/password"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

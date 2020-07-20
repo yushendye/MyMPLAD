@@ -16,6 +16,7 @@
         android:layout_centerHorizontal="true"
         app:srcCompat="@mipmap/logo" />
     <TextView
+        android:drawableLeft="@drawable/title"
         android:id="@+id/complaint_head"
         android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
@@ -27,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
+        android:drawableLeft="@drawable/description"
         android:id="@+id/det_complain_desc"
         android:layout_width="wrap_content"
         android:layout_marginTop="25dp"
@@ -38,6 +40,7 @@
         android:layout_below="@id/complaint_head"
         android:text="@string/complaint_desc"/>
     <TextView
+        android:drawableLeft="@drawable/location"
         android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/det_complaint_loc"
@@ -50,6 +53,7 @@
         android:text="@string/complain_loc"/>
 
     <TextView
+        android:drawableLeft="@drawable/username"
         android:id="@+id/det_cust_name"
         android:layout_marginTop="25dp"
         android:layout_below="@id/det_complaint_loc"
@@ -61,6 +65,7 @@
         android:textSize="16dp"/>
 
     <TextView
+        android:drawableLeft="@drawable/contact"
         android:id="@+id/det_cust_contact"
         android:layout_marginTop="25dp"
         android:layout_below="@id/det_cust_name"
@@ -83,7 +88,7 @@
         android:background="@drawable/reg_btn_backround"
         android:onClick="resolve"
         android:layout_below="@id/det_cust_contact"
-        android:drawableLeft="@android:drawable/checkbox_on_background"
+        android:drawableRight="@drawable/resolved2"
         android:text="@string/complaint_res"
         android:textAllCaps="false" />
 
@@ -98,7 +103,7 @@
         android:onClick="put_on_wait"
         android:layout_below="@id/det_complaint_res"
         android:background="@drawable/btn_wait"
-        android:drawableLeft="@android:drawable/presence_away"
+        android:drawableRight="@drawable/hold"
         android:text="@string/complaint_wait"
         android:textAllCaps="false" />
 </RelativeLayout>
